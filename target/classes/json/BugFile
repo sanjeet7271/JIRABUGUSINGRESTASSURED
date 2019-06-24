@@ -1,0 +1,62 @@
+{
+   "fields": {
+       "project":
+       {
+          "key": "TEST"
+       },
+       "summary": "Who seeks a faultless friend RESTs friendless.",
+       "description": "Creating an issue and setting time tracking fields",
+       "issuetype": {
+          "name": "Bug"
+        },       
+        "timetracking":
+        {
+           "originalEstimate": "1d 2h",
+           "remainingEstimate": "3h 25m"
+        },
+       	"assignee":{
+       		"name":"charlie"
+       	}
+  
+    }
+}
+
+
+Task Json:
+ {
+    "fields": {
+       "project":
+       {
+          "key": "VICRESKIN"
+       },
+     "priority":{  
+    	 "name":"Normal"
+		},
+       "summary": "REST ye merry gentlemen.",
+       "description": "Creating of an issue using project keys and issue type names using the REST API",
+       "issuetype": {
+          "name": "Task"
+       }
+   }
+}
+
+Bug Json :
+{
+    "fields": {
+        "summary": "Rest Api Demo Test",
+        "issuetype": {
+            "name": "Bug"
+        },
+        "customfield_10128": {
+            "value": "P2"
+        },
+        "customfield_11600":4655,
+        "customfield_15101":"Step to Reproduce :Desktop \n 1.) Launch Game on Desktop in chinese language",
+        "customfield_16804":"Actual result",
+        "customfield_10450":"Expected result",
+        "project": {
+            "key": "VICRESKIN"
+        },
+        "description": "Desktop \n 1.) Launch Game on Desktop in chinese language "
+    }
+}
