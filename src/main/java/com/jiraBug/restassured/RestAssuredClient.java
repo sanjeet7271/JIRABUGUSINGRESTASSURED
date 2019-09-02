@@ -24,7 +24,6 @@ public class RestAssuredClient extends GlobalReader {
 	 * @return
 	 */
 	public Response requestPostCall(String url, String entityString) {
-		System.out.println(username + " " + password);
 		Response response = RestAssured.given().auth().preemptive().basic(username, password).body(entityString)
 				.contentType(ContentType.JSON).log().all().when().post(url).then().log().all().extract().response();
 		return response;

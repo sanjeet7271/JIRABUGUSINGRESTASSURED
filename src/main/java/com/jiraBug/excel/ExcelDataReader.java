@@ -39,9 +39,11 @@ public class ExcelDataReader {
            cell = row.getCell(colNum);
            if(cell.getCellTypeEnum() == CellType.STRING)
                return cell.getStringCellValue();
+           		//return String.valueOf((int)cell.getNumericCellValue());
            else if(cell.getCellTypeEnum() == CellType.NUMERIC || cell.getCellTypeEnum() == CellType.FORMULA)
            {
-               String cellValue  = String.valueOf(cell.getNumericCellValue());
+               String cellValue  = String.valueOf((int)cell.getNumericCellValue());
+               //int cellValue = new BigDecimal(cell.getNumericCellValue()).setScale(0, RoundingMode.HALF_UP).intValue();
                if (HSSFDateUtil.isCellDateFormatted(cell))
                {
                    DateFormat df = new SimpleDateFormat("dd/MM/yy");

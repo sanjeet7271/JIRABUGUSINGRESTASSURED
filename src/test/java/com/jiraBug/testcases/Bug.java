@@ -3,6 +3,7 @@ package com.jiraBug.testcases;
 import java.io.IOException;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -11,6 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jiraBug.JSONConverter.convertIntoJson;
 import com.jiraBug.configreader.GlobalReader;
 import com.jiraBug.constants.StatusCode;
+import com.jiraBug.excel.ExcelSheetReader;
 import com.jiraBug.restassured.RestAssuredClient;
 
 import io.restassured.RestAssured;
@@ -26,15 +28,11 @@ public class Bug extends GlobalReader {
 	Response response;
 	String json;
 	convertIntoJson intoJson;
-	String key;
-	String summary;
-	String description;
-	String ActiveSprint;
-	String StepsToProduce;
-	String ActualResult;
-	String ExpectedResult;
-	String IssueType;
-	String BugPriority;
+	String xlFilePath = "./src/main/resources/jsonData/Jira.xlsx";
+	String sheetName = "BugDetails";
+	ExcelSheetReader ProvideData=new ExcelSheetReader();
+	Object[][] data;
+	
 	public Bug() throws IOException {
 		super();
 	}
@@ -50,10 +48,14 @@ public class Bug extends GlobalReader {
 
 	}
 
-	@Test
-	public void bugLockingJIRA() throws JsonProcessingException, IOException {
-		json=intoJson.JsonConverter(key,summary,description ,ActiveSprint,StepsToProduce,ActualResult,ExpectedResult,IssueType,BugPriority);
-		System.out.println(json);
+	@DataProvider(name = "bug")
+	public Object[][] CredentialtoLogin() throws Exception {
+		data = ProvideData.testData(xlFilePath, sheetName);
+        return data;
+	}
+	@Test(dataProvider="bug")
+	public void bugLockingJIRA(String Key,String Summary,String Description,String ActiveSprint, String StepsToProduce,String ActualResult,String ExpectedResult,String IssueType,String BugPriority) throws JsonProcessingException, IOException{
+		String json=intoJson.JsonConverter(Key,Summary,Description ,ActiveSprint,StepsToProduce,ActualResult,ExpectedResult,IssueType,BugPriority);
 		response = restAssuredClient.requestPostCall(endPointURLforLogin, json);
 		responseCode = response.getStatusCode();
 		responseCode = response.getStatusCode();
@@ -63,6 +65,6 @@ public class Bug extends GlobalReader {
 		RestAssured.defaultParser = Parser.JSON;
 		String key = response.jsonPath().get("key");
 		logger.info("New Key :" + key);
-
 	}
+	
 }

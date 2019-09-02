@@ -3,17 +3,17 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test verbose="2" name="Default test">
     <classes>
-      <class name="com.jiraBug.testcases.Bug"/>
+      <class name="com.jiraBug.testcases.Task"/>
     </classes>
   </test> <!-- Default test -->
   <test name="Default test(failed)">
     <classes>
-      <class name="com.jiraBug.testcases.Bug">
+      <class name="com.jiraBug.testcases.Task">
         <methods>
           <include name="setUp"/>
-          <include name="bugLockingJIRA"/>
+          <include name="taskCreateJIRA" invocation-numbers="0 1 2"/>
         </methods>
-      </class> <!-- com.jiraBug.testcases.Bug -->
+      </class> <!-- com.jiraBug.testcases.Task -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

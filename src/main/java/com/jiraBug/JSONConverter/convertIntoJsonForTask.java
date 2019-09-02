@@ -7,15 +7,15 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import org.json.simple.JSONObject;
 import org.testng.annotations.Test;
+import com.jiraBug.configreader.GlobalReader;
 
-import com.jiraBug.configreader.GlobalReaderForTask;
-
-public class convertIntoJsonForTask extends GlobalReaderForTask {
-	String ProjectID = property.getProperty("ProjectID");
-	String summary = property.getProperty("summary");
-	String description = property.getProperty("description");
-	String Priority = property.getProperty("Priority");
-	String IssueType = property.getProperty("IssueType");
+public class convertIntoJsonForTask extends GlobalReader {
+	String KEY = prop.getProperty("PROJECTID");
+	String SUMARY = prop.getProperty("SUMARY");
+	String DESCRIPTION = prop.getProperty("DESCRIPTION");
+	String PRIORITY_VALUE = prop.getProperty("PRIORITY_VALUE");
+	String ISSUETYPE = prop.getProperty("ISSUETYPE");
+	String ACTIVESPRINT_CUSTOMID = prop.getProperty("ACTIVESPRINT_CUSTOMID");
 	
 	public convertIntoJsonForTask() throws IOException {
 		super();
@@ -23,24 +23,25 @@ public class convertIntoJsonForTask extends GlobalReaderForTask {
 
 	@Test
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public Object JsonConverter() throws FileNotFoundException {
+	public JSONObject JsonConverter(String Key,String Summary,String Description,String ActiveSprint, String IssueType,String BugPriority) throws FileNotFoundException {
 		
 		JSONObject obj = new JSONObject();
 		JSONObject Jsonobj = new JSONObject();
 
 		Map map = new LinkedHashMap();
-		map.put("key", ProjectID);
+		map.put(KEY, Key);
 		obj.put("project", map);
 
-		obj.put("summary", summary);
-		obj.put("description", description);
+		obj.put(SUMARY, Summary);
+		obj.put(DESCRIPTION, Description);
+		obj.put(ACTIVESPRINT_CUSTOMID, Integer.parseInt(ActiveSprint));
 		
 		Map map1 = new LinkedHashMap();
-		map1.put("name", IssueType);
+		map1.put(ISSUETYPE, IssueType);
 		obj.put("issuetype", map1);
 
 		Map map2 = new LinkedHashMap();
-		map2.put("name", Priority);
+		map2.put(PRIORITY_VALUE, BugPriority);
 		obj.put("priority", map2);
 		
 		Jsonobj.put("fields", obj);
