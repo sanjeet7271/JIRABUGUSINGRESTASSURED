@@ -1,4 +1,4 @@
-# JIRABUGUSINGRESTASSURED
+# Jira Bug Using Rest-assured
 Jira bug logging by Rest-Assured, Java, Maven, Jacoco code coverage
 # JIRA Automation using Rest-Assured
 
